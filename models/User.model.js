@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema({
     },
 },{timestamps:true});
 
-UserSchema.method.comparePassword = async function (plain){
+UserSchema.methods.comparePassword = async function (plain){
     return bcrypt.compare(plain,this.passwordHash);
 };
 module.exports = mongoose.model('User',UserSchema);
