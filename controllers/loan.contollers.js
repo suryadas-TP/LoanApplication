@@ -7,7 +7,7 @@ const createLoan = async (req, res) => {
 };
 
 const getLoans = async (req, res) => {
-    const loans = await LoanApplication.find().populate('applicants');
+    const loans = await LoanApplication.find({createdBy:req.user._id}).populate('applicants');
     res.json(loans)
 };
 
@@ -25,7 +25,8 @@ const updateLoan = async (req,res)=>{
     if(!loan){
         return res.status(404).json({message:'loan not found'});
     };
-    res.status(loan);
+    
+    res.json(loan);
 };
 
 const deleteLoan = async(req,res)=>{
